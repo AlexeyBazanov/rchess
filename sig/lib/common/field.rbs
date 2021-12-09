@@ -1,0 +1,27 @@
+class Field
+  attr_reader cells: Array[Cell]
+
+  def initialize: () -> nil
+
+  def cell_by_position: (Position position) -> Cell
+
+  def cell_by_coordinates: (Integer x, Integer y) -> Cell
+
+  def figures: (Color color) -> Array[Figure]
+
+  def figure_by_position: (Position position) -> Figure
+
+  def figure_by_type: (Class c) -> Figure
+
+  def figure_present?: (Position position) -> bool
+
+  def set_figure: (Figure figure, Position position) -> nil
+
+  def move_figure: (Position position_from, Position position_to) -> nil
+
+  def remove_figure: (Position position) -> nil
+
+  private
+
+  def create_cells: () -> nil
+end

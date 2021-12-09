@@ -1,0 +1,11 @@
+class Cell
+  attr_accessor position: Position
+
+  attr_accessor figure: Figure
+
+  def initialize: (Position position) -> nil
+
+  def has_figure?: () -> bool
+
+  def clear_figure: () -> nil
+end

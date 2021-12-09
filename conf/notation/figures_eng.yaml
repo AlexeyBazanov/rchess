@@ -1,0 +1,23 @@
+notation:
+    figures:
+        names:
+            king: 'King'
+            queen: 'Queen'
+            bishop: 'Bishop'
+            knight: 'Knight'
+            rook: 'Rook'
+            pawn: 'Pawn'
+        signs:
+            white_king: 'K'
+            black_king: 'k'
+            white_queen: 'Q'
+            black_queen: 'q'
+            white_bishop: 'B'
+            black_bishop: 'b'
+            white_knight: 'N'
+            black_knight: 'n'
+            white_rook: 'R'
+            black_rook: 'r'
+            white_pawn: 'P'
+            black_pawn: 'p'
+

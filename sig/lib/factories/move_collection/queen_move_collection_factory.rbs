@@ -1,0 +1,3 @@
+class QueenMoveCollectionFactory < MoveCollectionFactory
+  def create: (Figure figure) -> MoveCollection
+end

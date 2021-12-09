@@ -1,0 +1,3 @@
+class AbstractFigureFactory
+  def create_figure: (String name) -> Figure
+end

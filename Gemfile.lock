@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    color-console (0.3.5)
+    rbs (1.0.0)
+    require_all (3.0.0)
+    zeitwerk (2.5.1)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  color-console
+  rbs
+  require_all
+  zeitwerk
+
+BUNDLED WITH
+   2.2.3

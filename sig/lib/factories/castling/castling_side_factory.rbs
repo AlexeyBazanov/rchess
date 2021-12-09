@@ -1,0 +1,5 @@
+class CastlingSideFactory
+  def self.create_king_side: () -> CastlingSide
+
+  def self.create_queen_side: () -> CastlingSide
+end

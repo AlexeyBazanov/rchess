@@ -1,0 +1,13 @@
+class KingMoveValidator < MoveValidator
+  def validate: (Turn turn, Round round) -> bool
+
+  private
+
+  def validate_king_move_collection: (MoveCollection king_move_collection, Array[MoveCollection] opposite_move_collections) -> nil
+
+  def validate_king_move: (Move king_move, Array[MoveCollection] opposite_move_collections) -> nil
+
+  def validate_attack_move: (Move king_move, Array[MoveCollection] opposite_move_collections) -> nil
+
+  def validate_silent_move: (Move king_move, Array[MoveCollection] opposite_move_collections) -> nil
+end

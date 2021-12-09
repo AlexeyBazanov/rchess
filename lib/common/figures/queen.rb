@@ -1,0 +1,1 @@
+class Queen < Figure; end

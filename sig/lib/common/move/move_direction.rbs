@@ -1,0 +1,33 @@
+class MoveDirection
+  STRAIGHT: ::Hash[Symbol, String]
+
+  DIAGONAL: ::Hash[Symbol, String]
+
+  attr_reader name: String
+
+  def initialize: (String name) -> nil
+
+  def straight?: () -> bool
+
+  def diagonal?: () -> bool
+
+  def vertical?: () -> bool
+
+  def horizontal?: () -> bool
+
+  def up?: () -> bool
+
+  def down?: () -> bool
+
+  def left?: () -> bool
+
+  def right?: () -> bool
+
+  def top_left?: () -> bool
+
+  def top_right?: () -> bool
+
+  def down_left?: () -> bool
+
+  def down_right?: () -> bool
+end

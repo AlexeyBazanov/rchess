@@ -1,0 +1,19 @@
+class Figure
+  attr_reader name: String
+
+  attr_reader color: Color
+
+  attr_reader moves_count: Integer
+
+  attr_reader position: Position
+
+  def initialize: (String name, Color color) -> nil
+
+  def has_moved?: () -> bool
+
+  def similar?: (Figure figure) -> bool
+
+  def same?: (Figure figure) -> bool
+
+  def under_attack?: (Position attack_position) -> bool
+end

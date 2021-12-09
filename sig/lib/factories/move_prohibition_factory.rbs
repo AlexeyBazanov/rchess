@@ -1,0 +1,9 @@
+class MoveProhibitionFactory
+  def self.create_figure_not_present: () -> MoveProhibition
+
+  def self.create_figure_already_move: () -> MoveProhibition
+
+  def self.create_cell_not_free: () -> MoveProhibition
+
+  def self.create_check_king_move: () -> MoveProhibition
+end

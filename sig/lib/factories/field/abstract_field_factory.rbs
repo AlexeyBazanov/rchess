@@ -1,0 +1,7 @@
+class AbstractFieldFactory
+  attr_reader figure_factory: AbstractFigureFactory
+
+  def initialize: (AbstractFigureFactory figure_factory) -> nil
+
+  def create_field: () -> Field
+end

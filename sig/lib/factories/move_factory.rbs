@@ -1,0 +1,7 @@
+class MoveFactory
+  attr_reader field: Field
+
+  def initialize: (Field field) -> nil
+
+  def create_move: (Position position_from, Position position_to, ?direction: MoveDirection? direction, ?barrier_figures: Array[Figure] barrier_figures, ?prev_moves: Array[Move] prev_moves) -> Move
+end

@@ -1,0 +1,3 @@
+class WhiteKingSideCastlingPattern < CastlingPattern
+  def initialize: () -> nil
+end

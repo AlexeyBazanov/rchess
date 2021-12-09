@@ -1,0 +1,22 @@
+notation:
+    figures:
+        names:
+            king: 'Король'
+            queen: 'Ферзь'
+            bishop: 'Слон'
+            knight: 'Конь'
+            rook: 'Ладья'
+            pawn: 'Пешка'
+        signs:
+            white_king: 'Кр'
+            black_king: 'кр'
+            white_queen: 'Ф'
+            black_queen: 'ф'
+            white_bishop: 'С'
+            black_bishop: 'с'
+            white_knight: 'К'
+            black_knight: 'к'
+            white_rook: 'Л'
+            black_rook: 'л'
+            white_pawn: 'П'
+            black_pawn: 'п'

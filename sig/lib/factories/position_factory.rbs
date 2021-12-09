@@ -1,0 +1,9 @@
+class PositionFactory
+  def self.create_by_coordinates: (Integer x, Integer y) -> Position
+
+  def self.create_by_notation: (Notation notation) -> (nil | Position)
+
+  def self.create_by_offset: (Position position, offset_x: Integer offset_x, offset_y: Integer offset_y) -> Position
+
+  def self.create_by_direction: (Position position, MoveDirection direction) -> Position
+end
