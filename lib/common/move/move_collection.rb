@@ -33,4 +33,10 @@ class MoveCollection
     end
     false
   end
+
+  def prohibit_moves(move_prohibition)
+    moves = possible_moves
+    moves = yield moves if block_given?
+    moves.each { |move| move.prohibit! move_prohibition }
+  end
 end

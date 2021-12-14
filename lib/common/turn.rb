@@ -1,19 +1,19 @@
 class Turn
-  attr_reader :color, :number
+  attr_reader :number
 
   def initialize
-    @color = ColorFactory.create_white
     @number = 1
   end
 
   def next
     @number += 1
-    change_color
   end
 
-  private
+  def prev
+    @number -= 1 if @number > 1
+  end
 
-  def change_color
-    @color = ColorFactory::create_opposite @color
+  def color
+    @number.odd? ? ColorFactory.create_white : ColorFactory.create_black
   end
 end

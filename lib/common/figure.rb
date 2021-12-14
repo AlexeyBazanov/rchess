@@ -8,7 +8,7 @@ class Figure
   end
 
   def has_moved?
-    @moves_count > 0
+    @moves_count.positive?
   end
 
   def similar?(figure)

@@ -1,6 +1,6 @@
 class Color
-  WHITE = 'white'
-  BLACK = 'black'
+  WHITE = 'white'.freeze
+  BLACK = 'black'.freeze
 
   attr_reader :name
 

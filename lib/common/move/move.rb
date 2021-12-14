@@ -62,6 +62,13 @@ class Move
     check? and one_opposite_figure_barrier?
   end
 
+  def intersect?(position)
+    move_set.each do |move|
+      return true if move.position_to.same? position
+    end
+    false
+  end
+
   def possible?
     if has_attacked_figure?
       can_attack?

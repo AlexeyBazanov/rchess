@@ -15,5 +15,9 @@ class MoveProhibitionFactory
     def create_check_king_move
       MoveProhibition.new 'This is a check move'
     end
+
+    def create_king_under_attack
+      MoveProhibition.new 'King under attack'
+    end
   end
 end

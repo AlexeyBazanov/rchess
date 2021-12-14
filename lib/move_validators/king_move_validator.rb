@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class KingMoveValidator < MoveValidator
   def validate(turn, round)
     current_color = turn.color
@@ -29,7 +31,7 @@ class KingMoveValidator < MoveValidator
     opposite_move_collections.each do |move_collection|
       if move_collection.has_attack_to_figure? king_move.attacked_figure
         king_move.prohibit! MoveProhibitionFactory.create_check_king_move
-        return
+        break
       end
     end
   end
@@ -37,11 +39,15 @@ class KingMoveValidator < MoveValidator
   def validate_silent_move(king_move, opposite_move_collections)
     opposite_move_collections.each do |move_collection|
       opposite_move = move_collection.move_by_destination_position king_move.position_to
+
       next unless opposite_move
-      move_barrier_by_king = opposite_move.one_opposite_figure_barrier? and opposite_move.blocked_by? king_move.figure
-      if opposite_move.possible? or move_barrier_by_king
+
+      is_move_barrier_by_king = opposite_move.one_opposite_figure_barrier? and
+        opposite_move.blocked_by? king_move.figure
+
+      if opposite_move.possible? || is_move_barrier_by_king
         king_move.prohibit! MoveProhibitionFactory.create_check_king_move
-        return
+        break
       end
     end
   end

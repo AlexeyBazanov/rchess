@@ -47,10 +47,10 @@ class Field
 
   def move_figure(position_from, position_to)
     cell_from = cell_by_position position_from
-    if cell_from.has_figure?
-      set_figure cell_from.figure, position_to
-      cell_from.clear_figure
-    end
+    return unless cell_from.has_figure?
+
+    set_figure cell_from.figure, position_to
+    cell_from.clear_figure
   end
 
   def remove_figure(position)
@@ -65,7 +65,7 @@ class Field
 
     Position::LIST.each do |x|
       Position::LIST.each do |y|
-        position = PositionFactory::create_by_coordinates x, y
+        position = PositionFactory.create_by_coordinates x, y
         cell = Cell.new position
         row.push cell
       end
