@@ -6,7 +6,7 @@ class PositionFactory
 
     def create_by_notation(notation)
       return nil unless notation.length.between? 1, 2
-      x, y = Notation::parse_move notation
+      x, y = Notation.parse_move notation
       self.create_by_coordinates(x, y)
     end
 

@@ -42,9 +42,15 @@ class Notation
 
     def parse_move(notation)
       return nil unless notation.is_a? String or not notation.length.between? MIN, MAX
-      x = NUMBERS.at(notation.at(0).to_i)
-      y = notation.at(1).to_i - 1
+      x = NUMBERS.at(char_to_int(notation, 0))
+      y = char_to_int(notation, 1) - 1
       [x, y]
+    end
+
+    private
+
+    def char_to_int(string, char_pos)
+      string[char_pos].to_i
     end
   end
 end

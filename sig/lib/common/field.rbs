@@ -7,11 +7,11 @@ class Field
 
   def cell_by_coordinates: (Integer x, Integer y) -> Cell
 
-  def figures: (Color color) -> Array[Figure]
+  def figures: (Color color, ?Class class_type) -> Array[Figure]
 
   def figure_by_position: (Position position) -> Figure
 
-  def figure_by_type: (Class c) -> Figure
+  def figure_by_type: (Class class_type, Color color) -> Figure?
 
   def figure_present?: (Position position) -> bool
 

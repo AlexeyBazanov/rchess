@@ -54,6 +54,10 @@ class Move
     attacked_figure_opposite? and not has_barrier_figures?
   end
 
+  def attack_to?(figure)
+    figure.same? @attacked_figure
+  end
+
   def check?
     can_attack? and @attacked_figure.is_a? King
   end

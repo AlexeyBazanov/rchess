@@ -3,5 +3,5 @@ class MoveValidator
 
   def initialize: (Field field) -> nil
 
-  def validate: (Turn turn, untyped round) -> bool
+  def validate: (Turn turn, Round round) -> bool
 end

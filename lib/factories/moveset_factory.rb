@@ -19,10 +19,18 @@ class MovesetFactory
     position_to = position_from
 
     cells_limit.times do
-      position_to = PositionFactory::create_by_direction position_to, direction
+      position_to = PositionFactory.create_by_direction position_to, direction
+
       break unless position_to
-      move = @move_factory.create_move position_from, position_to, direction, barrier_figures, moves
-      barrier_figures.push move.attacked_figure if move.has_attacked_figure?
+
+      move = @move_factory.create_move position_from,
+                                       position_to,
+                                       direction: direction,
+                                       barrier_figures: barrier_figures.dup,
+                                       prev_moves: moves.dup
+
+      barrier_figures.push(move.attacked_figure) if move.has_attacked_figure?
+
       moves.push move
     end
 
@@ -43,8 +51,9 @@ class MovesetFactory
     end
 
     offsets.each do |offset|
-      position_to = PositionFactory::create_by_offset position_from, offset_x: offset.x, offset_y: offset.y
+      position_to = PositionFactory::create_by_offset position_from, offset_x: offset[:x], offset_y: offset[:y]
       next unless position_to
+
       moves.push @move_factory.create_move position_from, position_to
     end
 

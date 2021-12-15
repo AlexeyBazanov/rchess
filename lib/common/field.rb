@@ -13,12 +13,16 @@ class Field
     @cells[x][y]
   end
 
-  def figures(color)
+  def figures(color=nil, class_type=nil)
     figures = []
     @cells.each do |row|
       row.each do |cell|
-        figure_present = cell.has_figure? and cell.figure.color.same? color
-        figures.push(cell.figure) if figure_present
+        next unless cell.has_figure?
+
+        is_same_color = color.is_a?(Color) ? cell.figure.color.same?(color) : true
+        is_same_class = !class_type.nil? ? cell.figure.is_a?(class_type) : true
+
+        figures.push(cell.figure) if is_same_color && is_same_class
       end
     end
     figures
@@ -34,6 +38,7 @@ class Field
     figures.each do |figure|
       return figure if figure.is_a? class_type
     end
+    nil
   end
 
   def figure_present?(position)
@@ -43,6 +48,7 @@ class Field
 
   def set_figure(figure, position)
     cell_by_position(position).figure = figure
+    figure.position = position
   end
 
   def move_figure(position_from, position_to)
@@ -50,6 +56,7 @@ class Field
     return unless cell_from.has_figure?
 
     set_figure cell_from.figure, position_to
+    cell_from.figure.increase_moves
     cell_from.clear_figure
   end
 

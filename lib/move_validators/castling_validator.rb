@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 class CastlingValidator < MoveValidator
-  def validate(castling)
+
+  def validate(turn, round)
+    current_side_castlings = round.get_castlings turn.color
+    opposite_move_collections = round.get_move_collections turn.color.opposite
+
+    current_side_castlings.each do |castling|
+      validate_castling castling, opposite_move_collections
+    end
+  end
+
+  def validate_castling(castling, opposite_move_collections)
     unless figures_in_place? castling
       castling.prohibition = MoveProhibitionFactory.create_figure_not_present
       return false
@@ -17,10 +27,20 @@ class CastlingValidator < MoveValidator
       return false
     end
 
+    if moves_positions_under_attack? castling, opposite_move_collections
+      castling.prohibition = MoveProhibitionFactory.create_cell_is_under_attack
+      return false
+    end
+
     true
   end
 
   private
+
+  def moves_positions_under_attack?(castling, opposite_move_collections)
+    # TODO доделать проверку на атаку на позиции рокировки
+    false
+  end
 
   def figures_in_place?(castling)
     figure_present? castling.king_position and figure_present? castling.rook_position

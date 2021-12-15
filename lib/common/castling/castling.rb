@@ -18,6 +18,22 @@ class Castling
     @though_position.is_a? Position
   end
 
+  def king_position
+    @king_move.position_from
+  end
+
+  def rook_position
+    @rook_move.position_from
+  end
+
+  def king_move_position
+    @king_move.position_to
+  end
+
+  def rook_move_position
+    @rook_move.position_to
+  end
+
   private
 
   def initialize_required_positions
