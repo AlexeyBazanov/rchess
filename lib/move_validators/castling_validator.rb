@@ -27,7 +27,7 @@ class CastlingValidator < MoveValidator
       return false
     end
 
-    if moves_positions_under_attack? castling, opposite_move_collections
+    if cells_under_attack? castling, opposite_move_collections
       castling.prohibition = MoveProhibitionFactory.create_cell_is_under_attack
       return false
     end
@@ -37,8 +37,13 @@ class CastlingValidator < MoveValidator
 
   private
 
-  def moves_positions_under_attack?(castling, opposite_move_collections)
-    # TODO доделать проверку на атаку на позиции рокировки
+  def cells_under_attack?(castling, opposite_move_collections)
+    opposite_move_collections.each do |move_collection|
+      castling.required_positions.each do |castling_position|
+        return true if move_collection.can_move_to? castling_position
+      end
+    end
+
     false
   end
 

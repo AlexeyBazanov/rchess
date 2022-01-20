@@ -34,6 +34,8 @@ class Castling
     @rook_move.position_to
   end
 
+
+
   private
 
   def initialize_required_positions

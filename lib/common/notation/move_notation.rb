@@ -1,4 +1,4 @@
-class MoveNotation < Notation
+class MoveNotation < AbstractNotation
   def initialize(move)
     @sign = move_to_sign move
   end

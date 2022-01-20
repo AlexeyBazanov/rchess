@@ -1,0 +1,25 @@
+@startuml
+class Color {
+    + {static} String WHITE
+    + {static} String BLACK
+    + String name
+
+    + Boolean white?()
+    + Boolean same?()
+    + Color opposite()
+}
+
+class AbstractNotation {
+    + String name
+    + String to_s()
+}
+
+class PositionNotation {
+    + {static} String[] LETTERS
+    + {static} String[] COORDINATES
+}
+
+AbstractNotation <|- PositionNotation
+
+
+@enduml

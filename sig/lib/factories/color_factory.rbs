@@ -1,0 +1,7 @@
+class ColorFactory
+  def self.create_white: () -> Color
+
+  def self.create_black: () -> Color
+
+  def self.create_opposite: (Color color) -> Color
+end

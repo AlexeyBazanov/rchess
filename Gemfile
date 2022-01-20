@@ -8,3 +8,4 @@ gem 'color-console'
 gem 'rbs'
 gem 'zeitwerk'
 gem 'rubocop', require: false
+gem 'rspec'

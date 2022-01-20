@@ -1,4 +1,4 @@
-class Notation
+class AbstractNotation
   attr_reader :sign
 
   def to_s

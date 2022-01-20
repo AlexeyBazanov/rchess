@@ -1,4 +1,4 @@
-class FigureNotation < Notation
+class FigureNotation < AbstractNotation
   attr_reader :name
 
   def initialize(figure)

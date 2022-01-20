@@ -18,9 +18,9 @@ class FieldRenderer
 
   def render_cells(field)
     output = ''
-    Position::LIST.reverse.each do |y|
+    Position::RANGE.reverse.each do |y|
       output += render_coordinate y
-      Position::LIST.each do |x|
+      Position::RANGE.each do |x|
         output += @cell_renderer.render field.cell_by_coordinates x, y
       end
       output += render_coordinate y

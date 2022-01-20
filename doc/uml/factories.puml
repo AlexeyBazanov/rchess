@@ -1,0 +1,7 @@
+@startuml
+class ColorFactory {
+    + {static} Color create_white()
+    + {static} Color create_black()
+    + {static} Color create_opposite(Color color)
+}
+@enduml

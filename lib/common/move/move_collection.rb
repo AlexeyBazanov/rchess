@@ -34,6 +34,13 @@ class MoveCollection
     false
   end
 
+  def can_move_to?(position)
+    possible_moves.each do |move|
+      return true if move.position_to.same? position
+    end
+    false
+  end
+
   def prohibit_moves(move_prohibition)
     moves = possible_moves
     moves = yield moves if block_given?

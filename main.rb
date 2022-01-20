@@ -39,9 +39,9 @@ end
 
 # puts Configuration.settings
 
-figure_factory = FenFigureFactory.new
-field_factory = FenFieldFactory.new figure_factory
-field = field_factory.create_field FenNotation::START_ARRANGEMENT
+# figure_factory = FenFigureFactory.new
+# field_factory = FenFieldFactory.new figure_factory
+# field = field_factory.create_field FenNotation::START_ARRANGEMENT
 
 # puts field.figures[1].position
 
@@ -79,3 +79,6 @@ field = field_factory.create_field FenNotation::START_ARRANGEMENT
 # puts field_renderer.render field
 
 # puts field
+#
+
+position = Position.new 11, 11

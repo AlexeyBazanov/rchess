@@ -1,7 +1,7 @@
 class Position
   START = 0
   FINISH = 7
-  LIST = (START..FINISH).to_a
+  RANGE = (START..FINISH).to_a
 
   attr_reader :x, :y, :notation
 
@@ -29,9 +29,5 @@ class Position
 
   def nearby_y?(position)
     position.y == y + 1 or position.y == y - 1
-  end
-
-  def self.acceptable?(value)
-    value.is_a? Integer and value.between? START, FINISH
   end
 end

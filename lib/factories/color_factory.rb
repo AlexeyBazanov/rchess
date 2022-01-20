@@ -9,7 +9,11 @@ class ColorFactory
     end
 
     def create_opposite(color)
-      if color.white? then create_black else create_white end
+      unless color.is_a? Color
+        raise ArgumentError.new 'color must be a Color class instance'
+      end
+
+      color.white? ? create_black : create_white
     end
   end
 end

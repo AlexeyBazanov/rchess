@@ -9,6 +9,8 @@ class Position
 
   FINISH: ::Integer
 
+  RANGE: ::Array[Integer]
+
   def initialize: (Integer x, Integer y) -> nil
 
   def same?: (Position position) -> bool
@@ -20,8 +22,4 @@ class Position
   def nearby_x?: (Position position) -> bool
 
   def nearby_y?: (Position position) -> bool
-
-  def self.to_notation: (Integer x, Integer y) -> ::String
-
-  def self.acceptable?: (Integer value) -> bool
 end

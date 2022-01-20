@@ -70,8 +70,8 @@ class Field
     @cells = []
     row = []
 
-    Position::LIST.each do |x|
-      Position::LIST.each do |y|
+    Position::RANGE.each do |x|
+      Position::RANGE.each do |y|
         position = PositionFactory.create_by_coordinates x, y
         cell = Cell.new position
         row.push cell

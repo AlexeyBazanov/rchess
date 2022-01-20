@@ -1,0 +1,11 @@
+class PositionNotation < Notation
+  LETTERS: ::Array[String]
+
+  COORDINATES: ::Array[Integer]
+
+  def initialize: (Position position) -> nil
+
+  private
+
+  def position_to_sign: (Position position) -> String
+end
