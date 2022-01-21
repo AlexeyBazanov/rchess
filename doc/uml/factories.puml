@@ -4,4 +4,11 @@ class ColorFactory {
     + {static} Color create_black()
     + {static} Color create_opposite(Color color)
 }
+
+class PositionFactory {
+    + {static} Position create_by_coordinates(Integer x, Integer y)
+    + {static} Position create_by_notation(String notation)
+    + {static} Position create_by_offset(Position position, Integer offset_x, Integer offset_y)
+    + {static} Position create_by_direction(Position position, MoveDirection direction)
+}
 @enduml

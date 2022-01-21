@@ -31,7 +31,7 @@ class Move
   end
 
   def blocked_by?(figure)
-    @barrier_figures.any? {|barrier_figure| barrier_figure.same? figure }
+    @barrier_figures.any? { |barrier_figure| barrier_figure.same? figure }
   end
 
   def one_opposite_figure_barrier?

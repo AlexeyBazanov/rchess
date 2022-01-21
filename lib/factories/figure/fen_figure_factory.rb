@@ -8,7 +8,7 @@ class FenFigureFactory < AbstractFigureFactory
       when *FenNotation::KNIGHT_SIGNS then Knight.new name, color
       when *FenNotation::ROOK_SIGNS then Rook.new name, color
       when *FenNotation::PAWN_SIGNS then Pawn.new name, color
-      else raise "'#{name}' is incorrect fen figure sign!"
+      else raise ArgumentError.new "'#{name}' is incorrect FEN figure sign"
     end
   end
 

@@ -4,7 +4,7 @@ class Figure
   def initialize(name, color)
     @name = name
     @color = color
-    @notation = FigureNotation.new self
+    # @notation = FigureNotation.new self
     @moves_count = 0
   end
 
@@ -25,7 +25,7 @@ class Figure
   end
 
   def similar?(figure)
-    @name == figure.name
+    @name.downcase == figure.name.downcase
   end
 
   def same?(figure)
