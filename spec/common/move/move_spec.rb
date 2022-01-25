@@ -1,6 +1,206 @@
-# describe Move do
-#   # describe '' do
-#   #
-#   # end
-#
-# end
+require 'common/position'
+require 'common/move/move_direction'
+require 'common/move/move_prohibition'
+require 'common/figure'
+require 'factories/figure/abstract_figure_factory'
+require 'factories/figure/fen_figure_factory'
+require 'factories/move_direction_factory'
+require 'factories/move_prohibition_factory'
+require 'common/figures/bishop'
+require 'common/move/move'
+
+describe Move do
+  let(:figure_factory) { FenFigureFactory.new }
+  let(:white_bishop) { figure_factory.create_figure FenNotation::WHITE_BISHOP }
+  let(:black_bishop) { figure_factory.create_figure FenNotation::BLACK_BISHOP }
+  let(:top_left_direction) { MoveDirectionFactory.create_top_left }
+  let(:top_right_direction) { MoveDirectionFactory.create_top_right }
+  let(:first_move) { Move.new white_bishop, Position.new(5,0), Position.new(1,4), top_left_direction }
+  let(:second_move) { Move.new white_bishop, Position.new(1,4), Position.new(3,6), top_right_direction }
+
+  describe '#move_set' do
+    context 'when 1 previous move exists' do
+      it 'should have two moves in move set' do
+        second_move.prev_moves << first_move
+        expect(second_move.move_set.length).to eql 2
+      end
+    end
+
+    context 'when previous moves doesnt exists' do
+      it 'should have one move in move set' do
+        expect(second_move.move_set.length).to eql 1
+      end
+    end
+  end
+
+  describe '#blocked_by?' do
+    context 'when move block by given figure' do
+      it 'should return true' do
+        black_bishop.position = first_move.position_to
+        first_move.barrier_figures << black_bishop
+        expect(first_move.blocked_by? black_bishop).to eql true
+      end
+    end
+
+    context 'when move doesnt block by given figure' do
+      it 'should return false' do
+        black_bishop.position = Position.new(1,1)
+        expect(first_move.blocked_by? black_bishop).to eql false
+      end
+    end
+  end
+
+  describe '#one_opposite_figure_barrier?' do
+    context 'when move has only one barrier figure' do
+      context 'when barrier figure color is opposite' do
+        it 'should return true' do
+          first_move.barrier_figures << black_bishop
+          expect(first_move.one_opposite_figure_barrier?).to eql true
+        end
+
+        context 'when barrier figure color is same' do
+          it 'should return false' do
+            first_move.barrier_figures << white_bishop
+            expect(first_move.one_opposite_figure_barrier?).to eql false
+          end
+        end
+      end
+    end
+
+    context 'when the quantity of barrier figures is not equal to one' do
+      it 'should return false' do
+        expect(first_move.one_opposite_figure_barrier?).to eql false
+      end
+    end
+  end
+
+  describe '#attacked_figure_opposite?' do
+    context 'when move has attacked figure' do
+      context 'when attacked figure color is opposite' do
+        it 'should return true' do
+          first_move.attacked_figure = black_bishop
+          expect(first_move.attacked_figure_opposite?).to eql true
+        end
+      end
+
+      context 'when attacked figure color is same' do
+        it 'should return false' do
+          first_move.attacked_figure = white_bishop
+          expect(first_move.attacked_figure_opposite?).to eql false
+        end
+      end
+    end
+
+    context 'when move doesnt has attacked figure' do
+      it 'should return false' do
+        expect(first_move.attacked_figure_opposite?).to eql false
+      end
+    end
+  end
+
+  describe '#can_attack?' do
+    context 'when move has attacked figure' do
+      context 'when attacked figure color is opposite' do
+        context 'when barrier figures doesnt exists' do
+          it 'should return true' do
+            first_move.attacked_figure = black_bishop
+            expect(first_move.can_attack?).to eql true
+          end
+        end
+
+        context 'when barrier figures exist' do
+          it 'should return false' do
+            first_move.attacked_figure = black_bishop
+            first_move.barrier_figures << black_bishop
+            expect(first_move.can_attack?).to eql false
+          end
+        end
+      end
+
+      context 'when attacked figure color is same' do
+        it 'should return false' do
+          first_move.attacked_figure = white_bishop
+          expect(first_move.can_attack?).to eql false
+        end
+      end
+    end
+
+    context 'when move doesnt has attacked figure' do
+      it 'should return false' do
+        expect(first_move.can_attack?).to eql false
+      end
+    end
+  end
+
+  describe '#check?' do
+    context 'when attacked figure exists' do
+      context 'when attacked figure is opposite king' do
+        it 'should return true' do
+          first_move.attacked_figure = figure_factory.create_figure FenNotation::BLACK_KING
+          expect(first_move.check?).to eql true
+        end
+      end
+
+      context 'when attacked figure is another' do
+        it 'should return false' do
+          first_move.attacked_figure = black_bishop
+          expect(first_move.check?).to eql false
+        end
+      end
+    end
+
+    context 'when attacked figure doesnt exists' do
+      it 'should return false' do
+        expect(first_move.check?).to eql false
+      end
+    end
+  end
+
+  describe '#possible?' do
+    context 'when move has attacked figure' do
+      context 'when attacked figure color is opposite' do
+        it 'should return true' do
+          first_move.attacked_figure = black_bishop
+          expect(first_move.possible?).to eql true
+        end
+      end
+
+      context 'when attacked figure color is same' do
+        it 'should return false' do
+          first_move.attacked_figure = white_bishop
+          expect(first_move.possible?).to eql false
+        end
+      end
+
+      context 'when move has barrier figures' do
+        it 'should return false' do
+          first_move.attacked_figure = black_bishop
+          first_move.barrier_figures << black_bishop
+          expect(first_move.possible?).to eql false
+        end
+      end
+    end
+
+    context 'when move doesnt has attacked figure' do
+      context 'when move doesnt has barrier figures and prohibition' do
+        it 'should return true' do
+          expect(first_move.possible?).to eql true
+        end
+      end
+
+      context 'when move has barrier figures' do
+        it 'should return false' do
+          first_move.barrier_figures << black_bishop
+          expect(first_move.possible?).to eql false
+        end
+      end
+
+      context 'when move has prohibition' do
+        it 'should return false' do
+          first_move.prohibit! MoveProhibitionFactory.create_king_under_attack
+          expect(first_move.possible?).to eql false
+        end
+      end
+    end
+  end
+end

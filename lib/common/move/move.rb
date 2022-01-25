@@ -13,7 +13,8 @@ class Move
     @score = 0
     @prev_moves = []
     @barrier_figures = []
-    @notation = MoveNotation.new self
+    # TODO вынести всю логику, связанную с отображением нотаций в отдельный модуль
+    # @notation = MoveNotation.new self
   end
 
   def move_set
@@ -35,7 +36,7 @@ class Move
   end
 
   def one_opposite_figure_barrier?
-    @barrier_figures.length == 1 and @barrier_figures[0].color.same? @figure.color
+    @barrier_figures.length == 1 and @barrier_figures[0].color.same? @figure.color.opposite
   end
 
   def has_prohibition?

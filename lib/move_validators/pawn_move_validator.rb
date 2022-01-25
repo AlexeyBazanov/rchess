@@ -1,6 +1,6 @@
 class PawnMoveValidator < MoveValidator
   def validate(turn, round)
-    opposite_side_pawns = field.figures(turn.color.opposite, Pawn)
+    opposite_side_pawns = field.figures(color: turn.color.opposite, class_type: Pawn)
     current_side_move_collections = round.get_move_collections turn.color, Pawn
     opposite_side_move_collections = round.get_move_collections turn.color.opposite, Pawn
 

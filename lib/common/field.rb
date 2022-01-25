@@ -13,7 +13,7 @@ class Field
     @cells[x][y]
   end
 
-  def figures(color=nil, class_type=nil)
+  def figures(color: nil, class_type: nil)
     figures = []
     @cells.each do |row|
       row.each do |cell|
@@ -34,7 +34,7 @@ class Field
   end
 
   def figure_by_type(class_type, color)
-    figures = figures(color)
+    figures = figures(color: color)
     figures.each do |figure|
       return figure if figure.is_a? class_type
     end
@@ -58,6 +58,7 @@ class Field
     set_figure cell_from.figure, position_to
     cell_from.figure.increase_moves
     cell_from.clear_figure
+    position_to
   end
 
   def remove_figure(position)
