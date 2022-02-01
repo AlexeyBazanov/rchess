@@ -5,11 +5,11 @@ class CastlingFactory
 
   def create_castlings: (Color king_color) -> Array[Castling]
 
+  def create_king_side_castling: (Color king_color) -> Castling?
+
+  def create_queen_side_castling: (Color king_color) -> Castling?
+
   private
 
-  def create_castling: (CastlingPattern castling_pattern) -> (Castling)
-
-  def create_king_side_castling: (Color king_color) -> Castling
-
-  def create_queen_side_castling: (Color king_color) -> Castling
+  def create_castling: (CastlingPattern castling_pattern) -> Castling?
 end

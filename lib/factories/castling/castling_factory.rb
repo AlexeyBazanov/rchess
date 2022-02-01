@@ -14,16 +14,6 @@ class CastlingFactory
     castlings
   end
 
-  private
-
-  def create_castling(castling_pattern)
-    king = @field.figure_by_position castling_pattern.king_position
-    rook = @field.figure_by_position castling_pattern.rook_position
-    king_move = Move.new king, castling_pattern.king_position, castling_pattern.king_move_position
-    rook_move = Move.new rook, castling_pattern.rook_position, castling_pattern.king_position
-    Castling.new king_move, rook_move, castling_pattern.side, castling_pattern.through_position
-  end
-
   def create_king_side_castling(king_color)
     if king_color.white?
       pattern = WhiteKingSideCastlingPattern.new
@@ -40,5 +30,17 @@ class CastlingFactory
       pattern = BlackQueenSideCastlingPattern.new
     end
     create_castling pattern
+  end
+
+  private
+
+  def create_castling(castling_pattern)
+    king = @field.figure_by_position castling_pattern.king_position
+    rook = @field.figure_by_position castling_pattern.rook_position
+    return if king.nil? || rook.nil?
+
+    king_move = Move.new king, castling_pattern.king_position, castling_pattern.king_move_position
+    rook_move = Move.new rook, castling_pattern.rook_position, castling_pattern.rook_move_position
+    Castling.new king_move, rook_move, castling_pattern.side, castling_pattern.through_position
   end
 end
