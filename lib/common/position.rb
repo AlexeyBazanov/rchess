@@ -30,4 +30,8 @@ class Position
   def nearby_y?(position)
     position.y == y + 1 or position.y == y - 1
   end
+
+  def self.coordinates_in_range?(x, y)
+    RANGE.include?(x) && RANGE.include?(y) 
+  end
 end

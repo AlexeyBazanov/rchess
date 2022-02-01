@@ -12,18 +12,18 @@ describe PositionFactory do
     end
 
     context 'when incorrect x coordinate were passed' do
-      it 'should raise ArgumentError exception' do
-        expect { PositionFactory.create_by_coordinates(8, 1) }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_coordinates(-1, 1) }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_coordinates('foo', 1) }.to raise_error ArgumentError
+      it 'should return nil' do
+        expect(PositionFactory.create_by_coordinates(8, 1)).to be_nil
+        expect(PositionFactory.create_by_coordinates(-1, 1)).to be_nil
+        expect(PositionFactory.create_by_coordinates('foo', 1)).to be_nil
       end
     end
 
     context 'when incorrect y coordinate were passed' do
-      it 'should raise ArgumentError exception' do
-        expect { PositionFactory.create_by_coordinates(1, -1) }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_coordinates(1, 8) }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_coordinates(1, 'foo') }.to raise_error ArgumentError
+      it 'should return nil' do
+        expect(PositionFactory.create_by_coordinates(1, -1)).to be_nil
+        expect(PositionFactory.create_by_coordinates(1, 8)).to be_nil
+        expect(PositionFactory.create_by_coordinates(1, 'foo')).to be_nil
       end
     end
   end
@@ -38,9 +38,21 @@ describe PositionFactory do
     context 'when invalid notation string were passed' do
       it 'should raise ArgumentError exception' do
         expect { PositionFactory.create_by_notation(43) }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_notation('e9') }.to raise_error ArgumentError
-        expect { PositionFactory.create_by_notation('z4') }.to raise_error ArgumentError
         expect { PositionFactory.create_by_notation('abc') }.to raise_error ArgumentError
+      end
+    end
+
+    context 'when invalid x notation were passed' do
+      it 'should return nil' do
+        expect(PositionFactory.create_by_notation('z2')).to be_nil
+        expect(PositionFactory.create_by_notation('m3')).to be_nil
+      end
+    end
+
+    context 'when invalid y notation were passed' do
+      it 'should return nil' do
+        expect(PositionFactory.create_by_notation('a9')).to be_nil
+        expect(PositionFactory.create_by_notation('b0')).to be_nil
       end
     end
   end
@@ -145,6 +157,28 @@ describe PositionFactory do
           expect(subject.x).to eql(6)
           expect(subject.y).to eql(4)
         end
+      end
+    end
+
+    context 'when the coordinates after direction go beyond the field boundary' do
+      it 'should return nil' do
+        position = Position.new(7,7)
+        direction = MoveDirection.new(MoveDirection::STRAIGHT[:up])
+
+        expect(PositionFactory.create_by_direction(position, direction)).to eql nil
+
+        direction = MoveDirection.new(MoveDirection::STRAIGHT[:right])
+
+        expect(PositionFactory.create_by_direction(position, direction)).to eql nil
+
+        position = Position.new(0,0)
+        direction = MoveDirection.new(MoveDirection::STRAIGHT[:down])
+
+        expect(PositionFactory.create_by_direction(position, direction)).to eql nil
+
+        direction = MoveDirection.new(MoveDirection::STRAIGHT[:left])
+
+        expect(PositionFactory.create_by_direction(position, direction)).to eql nil
       end
     end
 

@@ -5,8 +5,8 @@ class FenFieldFactory < AbstractFieldFactory
     y = Position::FINISH
 
     fen_notation.split('').each do |sign|
-      position = PositionFactory::create_by_coordinates x, y
       if FenNotation::figure? sign
+        position = PositionFactory::create_by_coordinates x, y
         place_figure sign, position, field
         x += 1
       elsif FenNotation::coordinate? sign
@@ -15,7 +15,7 @@ class FenFieldFactory < AbstractFieldFactory
         y -= 1
         x = 0
       else
-        raise "Invalid fen notation sign '#{sign}'!"
+        raise ArgumentError.new "Invalid fen notation sign '#{sign}'!"
       end
     end
 

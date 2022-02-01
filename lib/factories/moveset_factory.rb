@@ -8,7 +8,8 @@ class MovesetFactory
   def create_by_directions(position_from, directions, cells_limit: 7)
     moves = []
     directions.each do |direction|
-      moves.concat create_by_direction position_from, direction, cells_limit: cells_limit
+      direction_moves = create_by_direction position_from, direction, cells_limit: cells_limit
+      moves.concat direction_moves
     end
     moves
   end
@@ -28,6 +29,8 @@ class MovesetFactory
                                        direction: direction,
                                        barrier_figures: barrier_figures.dup,
                                        prev_moves: moves.dup
+
+      break if move.nil?
 
       barrier_figures.push(move.attacked_figure) if move.has_attacked_figure?
 
@@ -53,8 +56,8 @@ class MovesetFactory
     offsets.each do |offset|
       position_to = PositionFactory::create_by_offset position_from, offset_x: offset[:x], offset_y: offset[:y]
       next unless position_to
-
-      moves.push @move_factory.create_move position_from, position_to
+      move = @move_factory.create_move position_from, position_to
+      moves.push move unless move.nil?
     end
 
     moves

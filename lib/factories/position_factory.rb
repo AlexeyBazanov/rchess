@@ -1,14 +1,7 @@
 class PositionFactory
   class << self
     def create_by_coordinates(x, y)
-      unless x.is_a?(Integer) && x.between?(Position::START, Position::FINISH)
-        raise ArgumentError.new 'Invalid x coordinate'
-      end
-
-      unless y.is_a?(Integer) && y.between?(Position::START, Position::FINISH)
-        raise ArgumentError.new 'Invalid y coordinate'
-      end
-
+      return nil unless Position.coordinates_in_range? x, y
       Position.new(x, y)
     end
 
@@ -29,7 +22,7 @@ class PositionFactory
 
     def create_by_offset(position, offset_x:, offset_y:)
       unless position.is_a? Position
-        raise ArgumentError.new('position argument must be a Position class instance')
+        raise ArgumentError.new('Position argument must be a Position class instance')
       end
 
       unless offset_x.is_a?(Integer) && offset_y.is_a?(Integer)
@@ -41,11 +34,11 @@ class PositionFactory
 
     def create_by_direction(position, direction)
       unless position.is_a? Position
-        raise ArgumentError.new 'position argument must be a Position class instance'
+        raise ArgumentError.new 'Position argument must be a Position class instance'
       end
 
       unless direction.is_a? MoveDirection
-        raise ArgumentError.new 'direction argument must be a MoveDirection class instance'
+        raise ArgumentError.new 'Direction argument must be a MoveDirection class instance'
       end
 
       x = position.x
@@ -72,6 +65,8 @@ class PositionFactory
         x += 1
         y -= 1
       end
+
+      return nil unless Position.coordinates_in_range? x, y
 
       create_by_coordinates x, y
     end

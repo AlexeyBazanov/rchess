@@ -37,19 +37,19 @@ class MoveDirectionFactory
     end
 
     def create_top_left
-      MoveDirection.new MoveDirection::STRAIGHT[:top_left]
+      MoveDirection.new MoveDirection::DIAGONAL[:top_left]
     end
 
     def create_top_right
-      MoveDirection.new MoveDirection::STRAIGHT[:top_right]
+      MoveDirection.new MoveDirection::DIAGONAL[:top_right]
     end
 
     def create_down_left
-      MoveDirection.new MoveDirection::STRAIGHT[:down_left]
+      MoveDirection.new MoveDirection::DIAGONAL[:down_left]
     end
 
     def create_down_right
-      MoveDirection.new MoveDirection::STRAIGHT[:down_right]
+      MoveDirection.new MoveDirection::DIAGONAL[:down_right]
     end
   end
 end
