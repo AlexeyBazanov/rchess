@@ -1,0 +1,17 @@
+class RoundFactory
+  attr_reader field: Field
+
+  attr_reader move_collections_factory: MoveCollectionFactory
+
+  attr_reader castling_factory: CastlingFactory
+
+  def initialize: (Field field) -> nil
+
+  def create_round: (Turn turn) -> Round
+
+  private
+
+  def create_castlings: (Turn turn) -> ::Array[Array[Castling]]
+
+  def create_move_collections: () -> ::Array[Array[MoveCollection]]
+end

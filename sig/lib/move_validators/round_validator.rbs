@@ -1,0 +1,15 @@
+class RoundValidator < MoveValidator
+  attr_reader pawn_move_validator: PawnMoveValidator
+
+  attr_reader king_move_validator: KingMoveValidator
+
+  attr_reader check_validator: CheckValidator
+
+  attr_reader covered_check_validator: CoveredCheckValidator
+
+  attr_reader castling_validator: CastlingValidator
+
+  def initialize: (Field field) -> nil
+
+  def validate: (Turn turn, Round round) -> nil
+end

@@ -22,7 +22,7 @@ class MoveCollectionsFactory
   def create_move_collections(side_color)
     move_collections = []
 
-    @field.figures(side_color).each do |figure|
+    @field.figures(color: side_color).each do |figure|
       move_collection = create_move_collection figure
       move_collections.push move_collection
     end

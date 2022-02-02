@@ -16,6 +16,7 @@ class Round
   end
   
   def get_move_collection(figure)
+    return if figure.nil?
     move_collections = get_move_collections figure.color
     move_collections.find { |collection| collection.figure.same? figure }
   end
