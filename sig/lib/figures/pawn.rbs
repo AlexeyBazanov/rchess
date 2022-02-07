@@ -1,7 +1,0 @@
-class Pawn < Figure
-  attr_accessor can_be_taking_on_pass: bool
-
-  attr_accessor transform_possible: bool
-
-  def initialize: (String name, Color color) -> nil
-end

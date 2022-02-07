@@ -1,0 +1,9 @@
+module Rchess
+  class MoveNotation < Notation
+    def initialize: (Move move) -> nil
+
+    private
+
+    def move_to_sign: (Move move) -> String
+  end
+end

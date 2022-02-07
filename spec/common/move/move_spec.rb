@@ -1,13 +1,4 @@
-require 'common/position'
-require 'common/move/move_direction'
-require 'common/move/move_prohibition'
-require 'common/figure'
-require 'factories/figure/abstract_figure_factory'
-require 'factories/figure/fen_figure_factory'
-require 'factories/move_direction_factory'
-require 'factories/move_prohibition_factory'
-require 'common/figures/bishop'
-require 'common/move/move'
+require 'spec_helper'
 
 describe Move do
   let(:figure_factory) { FenFigureFactory.new }

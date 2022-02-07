@@ -1,0 +1,19 @@
+module Rchess
+  class CheckValidator < MoveValidator
+    def validate: (Turn turn, Round round) -> nil
+
+    private
+
+    def collect_check_moves: (Array[MoveCollection] move_collections) -> nil
+
+    def can_defend?: (Array[Move] check_moves) -> bool
+
+    def prohibit_all_except_king: (Array[MoveCollection] move_collections) -> nil
+
+    def prohibit_all_except_defend_and_king: (Move check_move, Array[MoveCollection] move_collections) -> nil
+
+    def each_move_collections_except_king: (Array[MoveCollection] move_collections) { (MoveCollection) -> MoveCollection } -> nil
+
+    def move_prohibition: () -> MoveProhibition
+  end
+end

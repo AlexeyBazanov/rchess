@@ -1,15 +1,4 @@
-require 'common/field'
-require 'common/color'
-require 'common/castling/castling'
-require 'common/castling/castling_pattern'
-require 'common/castling/castling_side'
-require 'common/castling/patterns/white_king_side_castling_pattern'
-require 'common/castling/patterns/black_king_side_castling_pattern'
-require 'common/castling/patterns/white_queen_side_castling_pattern'
-require 'common/castling/patterns/black_queen_side_castling_pattern'
-require 'factories/castling/castling_side_factory'
-require 'factories/castling/castling_factory'
-require 'factories/color_factory'
+require 'spec_helper'
 
 describe CastlingFactory do
   let(:figure_factory) { FenFigureFactory.new }

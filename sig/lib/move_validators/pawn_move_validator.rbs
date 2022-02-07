@@ -1,3 +1,0 @@
-class PawnMoveValidator < MoveValidator
-  def validate: (Turn turn, Round round) -> void
-end

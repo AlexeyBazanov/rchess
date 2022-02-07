@@ -1,0 +1,22 @@
+module Rchess
+  class Round
+    attr_reader white_move_collections: Array[MoveCollection]
+
+    attr_reader black_move_collections: Array[MoveCollection]
+
+    attr_reader white_castlings: Array[Castling]
+
+    attr_reader black_castlings: Array[Castling]
+
+    def initialize: (Array[MoveCollection] white_move_collections,
+        Array[MoveCollection] black_move_collections,
+        Array[Castling] white_castlings,
+        Array[Castling] black_castlings) -> nil
+
+    def get_move_collections: (Color color) -> Array[MoveCollection]
+
+    def get_move_collection: (Figure? figure) -> (MoveCollection | nil)
+
+    def get_castlings: (Color color) -> Array[Castling]
+  end
+end

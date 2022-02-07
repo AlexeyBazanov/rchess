@@ -1,7 +1,4 @@
-require 'common/position'
-require 'common/notation/fen_notation'
-require 'factories/position_factory'
-require 'common/move/move_direction'
+require 'spec_helper'
 
 describe PositionFactory do
   describe '.create_by_coordinates' do

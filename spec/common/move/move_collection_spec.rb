@@ -1,7 +1,6 @@
-require 'common/move/move'
-require 'common/move/move_collection'
+require 'spec_helper'
 
-describe MoveCollection do
+describe Rchess::MoveCollection do
 
 
 end

@@ -1,0 +1,13 @@
+module Rchess
+  class FenFieldFactory < AbstractFieldFactory
+    attr_reader figure_factory: FenFigureFactory
+
+    def initialize: (FenFigureFactory figure_factory) -> nil
+
+    def create_field: (String fen_notation) -> Field
+
+    private
+
+    def place_figure: (String notation_sign, Position position, Field field) -> nil
+  end
+end

@@ -1,14 +1,4 @@
-require 'common/field'
-require 'common/figures/pawn'
-require 'common/figures/rook'
-require 'common/figures/queen'
-require 'common/figures/knight'
-require 'common/move/move'
-require 'common/notation/fen_notation'
-require 'factories/move_factory'
-require 'factories/moveset_factory'
-require 'factories/field/fen_field_factory'
-require 'factories/position_factory'
+require 'spec_helper'
 
 describe MovesetFactory do
   let(:field_factory) { FenFieldFactory.new FenFigureFactory.new  }

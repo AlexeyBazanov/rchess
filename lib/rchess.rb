@@ -1,0 +1,3 @@
+module Rchess
+
+end

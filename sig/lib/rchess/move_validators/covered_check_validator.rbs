@@ -1,0 +1,15 @@
+module Rchess
+  class CoveredCheckValidator < MoveValidator
+    def validate: (Turn turn, Round round) -> nil
+
+    private
+
+    def collect_covered_check_moves: (Array[MoveCollection] move_collections) -> nil
+
+    def validate_barrier_figures_moves: (Array[Move] covered_check_moves, Array[MoveCollection] move_collections) -> nil
+
+    def validate_barrier_figure_moves: (Move covered_check_move, MoveCollection move_collection) -> nil
+
+    def prohibit_move: (Move move) -> nil
+  end
+end

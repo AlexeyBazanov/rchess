@@ -1,0 +1,17 @@
+module Rchess
+  class Color
+    WHITE: ::String
+
+    BLACK: ::String
+
+    attr_reader name: String
+
+    def initialize: (String name) -> nil
+
+    def white?: () -> bool
+
+    def same?: (Color color) -> bool
+
+    def opposite: () -> Color
+  end
+end

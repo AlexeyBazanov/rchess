@@ -1,7 +1,4 @@
-# require 'config/configuration'
-# require 'common/notation/abstract_notation'
-# require 'common/notation/figure_notation'
-require 'common/figure'
+require 'spec_helper'
 
 describe Figure do
   let(:white_king) { Figure.new(FenNotation::WHITE_KING, Color.new(Color::WHITE)) }

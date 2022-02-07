@@ -1,0 +1,16 @@
+module Rchess
+  class CastlingSide
+    QUEEN: ::String
+
+    KING: ::String
+
+    attr_reader name: String
+
+    def initialize: (String name) -> nil
+
+    def king?: () -> bool
+
+    def queen?: () -> bool
+  end
+
+end

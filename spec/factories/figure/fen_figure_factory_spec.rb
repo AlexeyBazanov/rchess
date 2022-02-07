@@ -1,15 +1,4 @@
-require 'common/color'
-require 'common/figure'
-require 'common/figures/king'
-require 'common/figures/queen'
-require 'common/figures/bishop'
-require 'common/figures/knight'
-require 'common/figures/rook'
-require 'common/figures/pawn'
-require 'common/notation/fen_notation'
-require 'factories/figure/abstract_figure_factory'
-require 'factories/figure/fen_figure_factory'
-require 'factories/color_factory'
+require 'spec_helper'
 
 describe FenFigureFactory do
   let(:factory) { FenFigureFactory.new }

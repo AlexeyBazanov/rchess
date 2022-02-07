@@ -1,0 +1,13 @@
+module Rchess
+  class MovesetFactory
+    attr_reader move_factory: MoveFactory
+
+    def initialize: (MoveFactory move_factory) -> nil
+
+    def create_by_directions: (Position position_from, Array[MoveDirection] directions, ?cells_limit: ::Integer cells_limit) -> Array[Move]
+
+    def create_by_direction: (Position position_from, MoveDirection direction, ?cells_limit: ::Integer cells_limit) -> Array[Move]
+
+    def create_by_offsets: (Position position_from, axis_one_offset: Integer axis_one_offset, axis_two_offset: Integer axis_two_offset) -> Array[Move]
+  end
+end

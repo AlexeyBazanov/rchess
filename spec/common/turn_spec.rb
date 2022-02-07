@@ -1,4 +1,3 @@
-# require 'common/turn'
 require 'spec_helper'
 
 describe Turn do

@@ -1,5 +1,4 @@
-require 'common/notation/abstract_notation'
-require 'common/notation/position_notation'
+require 'spec_helper'
 
 describe PositionNotation do
   let(:start_coordinate) { Position::START }

@@ -1,0 +1,5 @@
+module Rchess
+  class WhiteQueenSideCastlingPattern < CastlingPattern
+    def initialize: () -> nil
+  end
+end

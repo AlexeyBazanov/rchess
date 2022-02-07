@@ -1,0 +1,5 @@
+module Rchess
+  class BishopMoveCollectionFactory < MoveCollectionFactory
+    def create: (Figure figure) -> MoveCollection
+  end
+end

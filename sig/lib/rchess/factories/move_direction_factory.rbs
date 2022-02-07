@@ -1,0 +1,29 @@
+module Rchess
+  class MoveDirectionFactory
+    def self.create_all: () -> Array[MoveDirection]
+
+    def self.create_vertical_and_horizontal: () -> Array[MoveDirection]
+
+    def self.create_horizontal: () -> ::Array[MoveDirection]
+
+    def self.create_vertical: () -> ::Array[MoveDirection]
+
+    def self.create_diagonal: () -> ::Array[MoveDirection]
+
+    def self.create_up: () -> MoveDirection
+
+    def self.create_down: () -> MoveDirection
+
+    def self.create_left: () -> MoveDirection
+
+    def self.create_right: () -> MoveDirection
+
+    def self.create_top_left: () -> MoveDirection
+
+    def self.create_top_right: () -> MoveDirection
+
+    def self.create_down_left: () -> MoveDirection
+
+    def self.create_down_right: () -> MoveDirection
+  end
+end

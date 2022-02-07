@@ -1,0 +1,9 @@
+module Rchess
+  class MoveCollectionFactory
+    attr_reader moveset_factory: MovesetFactory
+
+    def initialize: (MovesetFactory moveset_factory) -> nil
+
+    def create: (Figure figure) -> MoveCollection
+  end
+end

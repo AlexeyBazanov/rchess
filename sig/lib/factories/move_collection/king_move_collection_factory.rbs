@@ -1,3 +1,0 @@
-class KingMoveCollectionFactory < MoveCollectionFactory
-  def create: (Figure figure) -> MoveCollection
-end

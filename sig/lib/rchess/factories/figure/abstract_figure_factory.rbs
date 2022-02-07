@@ -1,0 +1,5 @@
+module Rchess
+  class AbstractFigureFactory
+    def create_figure: (String name) -> Figure
+  end
+end

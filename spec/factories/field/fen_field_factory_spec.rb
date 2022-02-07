@@ -1,13 +1,4 @@
-require 'factories/field/abstract_field_factory'
-require 'factories/field/fen_field_factory'
-require 'common/notation/fen_notation'
-require 'common/field'
-require 'common/figures/rook'
-require 'common/figures/knight'
-require 'common/figures/bishop'
-require 'common/figures/queen'
-require 'common/figures/king'
-require 'common/figures/pawn'
+require 'spec_helper'
 
 describe FenFieldFactory do
   let(:field_factory) { FenFieldFactory.new FenFigureFactory.new  }

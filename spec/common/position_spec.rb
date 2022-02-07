@@ -1,5 +1,4 @@
-require 'common/notation/position_notation'
-require 'common/position'
+require 'spec_helper'
 
 describe Position do
   let(:position_one) { Position.new(Position::START, Position::START) }

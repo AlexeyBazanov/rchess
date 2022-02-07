@@ -1,5 +1,0 @@
-class MoveProhibition
-  attr_reader name: String
-
-  def initialize: (String name) -> nil
-end

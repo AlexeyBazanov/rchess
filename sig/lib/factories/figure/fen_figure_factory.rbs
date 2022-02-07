@@ -1,7 +1,0 @@
-class FenFigureFactory < AbstractFigureFactory
-  def create_figure: (String name) -> Figure
-
-  private
-
-  def color_by_name: (String name) -> Color
-end

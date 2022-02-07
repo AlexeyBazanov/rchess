@@ -1,7 +1,0 @@
-class MoveValidator
-  attr_reader field: Field
-
-  def initialize: (Field field) -> nil
-
-  def validate: (Turn turn, Round round) -> bool
-end

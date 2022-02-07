@@ -1,14 +1,4 @@
-# TODO написать тесты после тестов классов Field и FieldFactory
-
-require 'common/figure'
-require 'common/figures/pawn'
-require 'common/move/move'
-require 'common/move/move_direction'
-require 'common/position'
-require 'common/field'
-require 'factories/field/fen_field_factory'
-require 'factories/move_factory'
-require 'factories/position_factory'
+require 'spec_helper'
 
 describe MoveFactory do
   let(:field_factory) { FenFieldFactory.new FenFigureFactory.new  }

@@ -1,0 +1,16 @@
+module Rchess
+  class Turn
+    attr_reader color: Color
+
+    attr_reader number: Integer
+
+    def initialize: () -> nil
+
+    def next: () -> nil
+
+    private
+
+    def change_color: () -> nil
+  end
+
+end

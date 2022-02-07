@@ -1,1 +1,0 @@
-class Knight < Figure; end

@@ -1,13 +1,4 @@
-require 'common/position'
-require 'common/color'
-require 'common/figure'
-require 'common/cell'
-require 'common/field'
-require 'common/figures/king'
-require 'common/figures/pawn'
-require 'factories/figure/abstract_figure_factory'
-require 'factories/figure/fen_figure_factory'
-require 'factories/color_factory'
+require 'spec_helper'
 
 describe Field do
   let(:field) { Field.new }

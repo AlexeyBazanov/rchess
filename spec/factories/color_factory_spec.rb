@@ -1,5 +1,4 @@
-require 'factories/color_factory'
-require 'common/color'
+require 'spec_helper'
 
 shared_examples 'Color instance' do
   it 'should be a Color class instance' do

@@ -1,0 +1,6 @@
+module Rchess
+  class BlackKingSideCastlingPattern < CastlingPattern
+    def initialize: () -> nil
+  end
+end
+

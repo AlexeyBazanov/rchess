@@ -1,4 +1,4 @@
-require 'common/color'
+require 'spec_helper'
 
 describe Color do
   let(:white_color) { Color.new Color::WHITE }
