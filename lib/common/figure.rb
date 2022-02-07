@@ -4,7 +4,7 @@ class Figure
   def initialize(name, color)
     @name = name
     @color = color
-    # @notation = FigureNotation.new self
+    @notation = FenFigureNotation.new self
     @moves_count = 0
   end
 

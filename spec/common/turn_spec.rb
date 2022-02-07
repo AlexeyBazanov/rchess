@@ -1,4 +1,5 @@
-require 'common/turn'
+# require 'common/turn'
+require 'spec_helper'
 
 describe Turn do
   let(:turn) { Turn.new }

@@ -5,6 +5,10 @@ class Field
     create_cells
   end
 
+  def notation
+    FenFieldNotation.new self
+  end
+
   def cell_by_position(position)
     @cells[position.x][position.y]
   end
@@ -13,17 +17,23 @@ class Field
     @cells[x][y]
   end
 
-  def figures(color: nil, class_type: nil)
-    figures = []
+  def each_cell
     @cells.each do |row|
       row.each do |cell|
-        next unless cell.has_figure?
-
-        is_same_color = color.is_a?(Color) ? cell.figure.color.same?(color) : true
-        is_same_class = !class_type.nil? ? cell.figure.is_a?(class_type) : true
-
-        figures.push(cell.figure) if is_same_color && is_same_class
+        yield cell
       end
+    end
+  end
+
+  def figures(color: nil, class_type: nil)
+    figures = []
+    each_cell do |cell|
+      next unless cell.has_figure?
+
+      is_same_color = color.is_a?(Color) ? cell.figure.color.same?(color) : true
+      is_same_class = !class_type.nil? ? cell.figure.is_a?(class_type) : true
+
+      figures.push(cell.figure) if is_same_color && is_same_class
     end
     figures
   end

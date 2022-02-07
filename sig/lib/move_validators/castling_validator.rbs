@@ -1,5 +1,5 @@
 class CastlingValidator < MoveValidator
-  def validate: (Turn turn, Round round) -> bool
+  def validate: (Turn turn, Round round) -> nil
 
   private
 

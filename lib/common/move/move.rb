@@ -14,7 +14,7 @@ class Move
     @prev_moves = []
     @barrier_figures = []
     # TODO вынести всю логику, связанную с отображением нотаций в отдельный модуль
-    # @notation = MoveNotation.new self
+    @notation = MoveNotation.new self
   end
 
   def move_set

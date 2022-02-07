@@ -11,6 +11,8 @@ class CastlingValidator < MoveValidator
     end
   end
 
+  private
+
   def validate_castling(castling, opposite_move_collections)
     unless figures_in_place? castling
       castling.prohibition = MoveProhibitionFactory.create_figure_not_present
@@ -34,8 +36,6 @@ class CastlingValidator < MoveValidator
 
     true
   end
-
-  private
 
   def cells_under_attack?(castling, opposite_move_collections)
     opposite_move_collections.each do |move_collection|
