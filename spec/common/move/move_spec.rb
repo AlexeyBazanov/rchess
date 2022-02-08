@@ -1,4 +1,5 @@
 require 'spec_helper'
+include Rchess
 
 describe Move do
   let(:figure_factory) { FenFigureFactory.new }
@@ -6,8 +7,22 @@ describe Move do
   let(:black_bishop) { figure_factory.create_figure FenNotation::BLACK_BISHOP }
   let(:top_left_direction) { MoveDirectionFactory.create_top_left }
   let(:top_right_direction) { MoveDirectionFactory.create_top_right }
-  let(:first_move) { Move.new white_bishop, Position.new(5,0), Position.new(1,4), top_left_direction }
-  let(:second_move) { Move.new white_bishop, Position.new(1,4), Position.new(3,6), top_right_direction }
+  let(:first_move) {
+    Move.new(
+      white_bishop,
+      PositionFactory.create_by_notation('f1'),
+      PositionFactory.create_by_notation('b5'),
+      top_left_direction
+    )
+  }
+  let(:second_move) {
+    Move.new(
+      white_bishop,
+      PositionFactory.create_by_notation('b5'),
+      PositionFactory.create_by_notation('d7'),
+      top_right_direction
+    )
+  }
 
   describe '#move_set' do
     context 'when 1 previous move exists' do
@@ -192,6 +207,45 @@ describe Move do
           expect(first_move.possible?).to eql false
         end
       end
+    end
+  end
+
+  describe '#intersect?' do
+    before(:each) do
+      prev_move_one = Move.new(
+        white_bishop,
+        PositionFactory.create_by_notation('f1'),
+        PositionFactory.create_by_notation('e2'),
+        top_left_direction
+      )
+
+      prev_move_two = Move.new(
+        white_bishop,
+        PositionFactory.create_by_notation('f1'),
+        PositionFactory.create_by_notation('d3'),
+        top_left_direction
+      )
+
+      prev_move_three = Move.new(
+        white_bishop,
+        PositionFactory.create_by_notation('f1'),
+        PositionFactory.create_by_notation('c4'),
+        top_left_direction
+      )
+
+      first_move.prev_moves = [prev_move_one, prev_move_two, prev_move_three]
+    end
+
+    it 'should return true if given position intersect positions of prev moves' do
+      expect(first_move.intersect? PositionFactory.create_by_notation('e2')).to be_truthy
+      expect(first_move.intersect? PositionFactory.create_by_notation('d3')).to be_truthy
+      expect(first_move.intersect? PositionFactory.create_by_notation('c4')).to be_truthy
+    end
+
+    it 'should return false if given position doesn`t intersect positions of prev moves' do
+      expect(first_move.intersect? PositionFactory.create_by_notation('g4')).to be_falsey
+      expect(first_move.intersect? PositionFactory.create_by_notation('h8')).to be_falsey
+      expect(first_move.intersect? PositionFactory.create_by_notation('c1')).to be_falsey
     end
   end
 end

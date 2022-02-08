@@ -53,11 +53,20 @@ module Rchess
     end
 
     def can_attack?
-      attacked_figure_opposite? and not has_barrier_figures?
+      attacked_figure_opposite? and not has_barrier_figures? and not has_prohibition?
     end
 
     def attack_to?(figure)
+      return false unless has_attacked_figure?
       figure.same? @attacked_figure
+    end
+
+    def possible?
+      if has_attacked_figure?
+        can_attack?
+      else
+        not has_barrier_figures? and not has_prohibition?
+      end
     end
 
     def check?
@@ -73,14 +82,6 @@ module Rchess
         return true if move.position_to.same? position
       end
       false
-    end
-
-    def possible?
-      if has_attacked_figure?
-        can_attack?
-      else
-        not has_barrier_figures? and not has_prohibition?
-      end
     end
 
     def transform_possible?

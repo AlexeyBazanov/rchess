@@ -1,13 +1,13 @@
 module Rchess
   class Castling
-    attr_reader :king_move, :rook_move, :side, :though_position, :required_positions
+    attr_reader :king_move, :rook_move, :side, :through_position, :required_positions
     attr_accessor :prohibition
 
     def initialize(king_move, rook_move, side, through_position)
       @king_move = king_move
       @rook_move = rook_move
       @side = side
-      @though_position = through_position
+      @through_position = through_position
       initialize_required_positions
     end
 
@@ -16,7 +16,7 @@ module Rchess
     end
 
     def has_through?
-      @though_position.is_a? Position
+      @through_position.is_a? Position
     end
 
     def king_position
@@ -42,7 +42,7 @@ module Rchess
         @king_move.position_from, @king_move.position_to,
         @rook_move.position_from, @rook_move.position_to
       ]
-      @required_positions.push(@though_position) if @though_position.is_a? Position
+      @required_positions.push(@through_position) if @through_position.is_a? Position
     end
   end
 end

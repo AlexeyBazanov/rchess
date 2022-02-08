@@ -8,12 +8,11 @@ module Rchess
     end
 
     def get_figure_name(figure)
-      figure.class.name
+      figure.name
     end
 
     def get_figure_sign(figure)
-      sign = figure.class.name[0]
-      figure.color.white? ? sign.upcase : sign.downcase
+      figure.color.white? ? figure.name[0].upcase : figure.name[0].downcase
     end
   end
 end
