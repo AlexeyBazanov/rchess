@@ -74,7 +74,7 @@ module Rchess
     end
 
     def covered_check?
-      check? and one_opposite_figure_barrier?
+      has_attacked_figure? and @attacked_figure.is_a? King and one_opposite_figure_barrier?
     end
 
     def intersect?(position)

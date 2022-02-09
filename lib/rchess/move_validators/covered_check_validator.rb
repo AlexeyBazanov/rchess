@@ -5,6 +5,8 @@ module Rchess
       opposite_side_move_collections = round.get_move_collections turn.color.opposite
       covered_check_moves = collect_covered_check_moves opposite_side_move_collections
 
+      puts "Covered check moves - #{covered_check_moves.length}"
+
       return if covered_check_moves.length.zero?
 
       validate_barrier_figures_moves covered_check_moves, current_side_move_collections

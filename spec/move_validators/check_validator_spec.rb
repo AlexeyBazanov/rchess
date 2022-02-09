@@ -1,4 +1,4 @@
-# require 'spec_helper'
+require 'spec_helper'
 
 describe Rchess::CheckValidator do
   let(:figure_factory) { FenFigureFactory.new }

@@ -162,6 +162,14 @@ describe Move do
     end
   end
 
+  describe '#can_attack?' do
+    # TODO
+  end
+
+  describe '#covered_check?' do
+    # TODO
+  end
+
   describe '#possible?' do
     context 'when move has attacked figure' do
       context 'when attacked figure color is opposite' do
