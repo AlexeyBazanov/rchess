@@ -31,7 +31,7 @@ module Rchess
     def validate_attack_move(king_move, opposite_move_collections)
       opposite_move_collections.each do |move_collection|
         if move_collection.has_attack_to_figure? king_move.attacked_figure
-          king_move.prohibit! MoveProhibitionFactory.create_check_king_move
+          king_move.prohibit! get_move_prohibition
           break
         end
       end
@@ -47,10 +47,14 @@ module Rchess
           opposite_move.blocked_by? king_move.figure
 
         if opposite_move.possible? || is_move_barrier_by_king
-          king_move.prohibit! MoveProhibitionFactory.create_check_king_move
+          king_move.prohibit! get_move_prohibition
           break
         end
       end
+    end
+
+    def get_move_prohibition
+      MoveProhibitionFactory.create_check_king_move
     end
   end
 end
