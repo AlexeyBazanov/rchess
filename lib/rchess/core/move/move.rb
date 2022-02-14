@@ -1,21 +1,25 @@
 module Rchess
   class Move
-    attr_reader :figure, :position_from, :position_to, :direction, :notation
+    attr_reader :figure, :position_from, :position_to, :direction
     attr_accessor :attacked_figure, :prev_moves, :barrier_figures,
                   :prohibition, :can_be_taking_on_pass, :transform_possible, :score
 
-    def initialize(figure, position_from, position_to, direction=nil)
+    def initialize(figure, position_from, position_to, direction=nil, attacked_figure=nil)
       @figure = figure
       @position_from = position_from
       @position_to = position_to
       @direction = direction
+      @attacked_figure = attacked_figure
       @can_be_taking_on_pass = false
       @transform_possible = false
       @score = 0
       @prev_moves = []
       @barrier_figures = []
       # TODO вынести всю логику, связанную с отображением нотаций в отдельный модуль
-      @notation = MoveNotation.new self
+    end
+
+    def notation
+      MoveNotation.new self
     end
 
     def move_set

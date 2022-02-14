@@ -1,41 +1,79 @@
 require "zeitwerk"
-require 'yaml'
 
-src_path = File.dirname(__FILE__) + '/lib'
-config_path = File.dirname(__FILE__) + '/conf'
-
+src_path = Dir.pwd + '/lib'
 loader = Zeitwerk::Loader.new
+
 loader.push_dir src_path
-loader.push_dir src_path + '/adapters/console/renderers'
-loader.push_dir src_path + '/common/castling/patterns'
+loader.collapse("#{src_path}/rchess/core")
+loader.collapse("#{src_path}/rchess/game_logic")
+loader.collapse("#{src_path}/rchess/core/castling")
+loader.collapse("#{src_path}/rchess/core/castling/patterns")
+loader.collapse("#{src_path}/rchess/core/figures")
+loader.collapse("#{src_path}/rchess/core/move")
+loader.collapse("#{src_path}/rchess/core/notation")
+loader.collapse("#{src_path}/rchess/factories")
+loader.collapse("#{src_path}/rchess/factories")
+loader.collapse("#{src_path}/rchess/factories/castling")
+loader.collapse("#{src_path}/rchess/factories/field")
+loader.collapse("#{src_path}/rchess/factories/figure")
+loader.collapse("#{src_path}/rchess/factories/move_collection")
+loader.collapse("#{src_path}/rchess/factories/party")
+loader.collapse("#{src_path}/rchess/move_validators")
 
-subdir_pattern = '/*'
-
-# TODO Разобраться с автолоадером!
-5.times do
-  loader.collapse("#{src_path}#{subdir_pattern}")
-  subdir_pattern *= 2
-end
-
-loader.enable_reloading
 loader.setup
 
-config_files = %w[main.yaml notation/figures_eng.yaml notation/moves.yaml]
+include Rchess
 
-# TODO вынести в отдельный модуль
-class ::Hash
-  def deep_merge!(second)
-    merger = proc { |_, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : Array === v1 && Array === v2 ? v1 | v2 : [:undefined, nil, :nil].include?(v2) ? v1 : v2 }
-    merge!(second.to_h, &merger)
-  end
-end
+party_factory = FenPartyFactory.new
+party = party_factory.create FenNotation::START_ARRANGEMENT
+party.start
+puts party.current_notation
+party.do_move 'e2', 'e4'
+party.do_move 'd7', 'd5'
+party.do_move 'e4', 'd5'
 
-Configuration.configure do |config|
-  config_files.each do |config_file|
-    hashed_config = YAML.load_file "#{config_path}/#{config_file}", symbolize_names: true
-    config.deep_merge! hashed_config
-  end
-end
+puts party.current_notation
+party.move_log.history.each { |move| puts move }
+
+# puts party.current_notation
+
+# require 'yaml'
+#
+# src_path = File.dirname(__FILE__) + '/lib'
+# config_path = File.dirname(__FILE__) + '/conf'
+#
+# loader = Zeitwerk::Loader.new
+# loader.push_dir src_path
+# loader.push_dir src_path + '/adapters/console/renderers'
+# loader.push_dir src_path + '/common/castling/patterns'
+#
+# subdir_pattern = '/*'
+#
+# # TODO Разобраться с автолоадером!
+# 5.times do
+#   loader.collapse("#{src_path}#{subdir_pattern}")
+#   subdir_pattern *= 2
+# end
+#
+# loader.enable_reloading
+# loader.setup
+#
+# config_files = %w[main.yaml notation/figures_eng.yaml notation/moves.yaml]
+#
+# # TODO вынести в отдельный модуль
+# class ::Hash
+#   def deep_merge!(second)
+#     merger = proc { |_, v1, v2| Hash === v1 && Hash === v2 ? v1.merge(v2, &merger) : Array === v1 && Array === v2 ? v1 | v2 : [:undefined, nil, :nil].include?(v2) ? v1 : v2 }
+#     merge!(second.to_h, &merger)
+#   end
+# end
+#
+# Configuration.configure do |config|
+#   config_files.each do |config_file|
+#     hashed_config = YAML.load_file "#{config_path}/#{config_file}", symbolize_names: true
+#     config.deep_merge! hashed_config
+#   end
+# end
 
 # puts Configuration.settings
 
@@ -81,4 +119,7 @@ end
 # puts field
 #
 
-position = Position.new 11, 11
+# position = Position.new 11, 11
+#
+
+

@@ -15,6 +15,7 @@ module Rchess
     def move_by_destination_position: (Position position) -> (Move | nil)
 
     def has_attack_to_figure?: (Figure figure) -> bool
-  end
 
+    def can_move_to?: (Position position) -> bool
+  end
 end

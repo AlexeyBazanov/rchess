@@ -42,6 +42,10 @@ module Rchess
       false
     end
 
+    def find_move(position_from, position_to)
+      @moves.find { |move| move.position_from.same?(position_from) and move.position_to.same?(position_to) }
+    end
+
     def prohibit_moves(move_prohibition)
       moves = possible_moves
       moves = yield moves if block_given?

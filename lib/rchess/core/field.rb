@@ -26,6 +26,14 @@ module Rchess
       end
     end
 
+    def each_cell_right_top
+      @cells.transpose.reverse.each do |row|
+        row.each do |cell|
+          yield cell
+        end
+      end
+    end
+
     def figures(color: nil, class_type: nil)
       figures = []
       each_cell do |cell|

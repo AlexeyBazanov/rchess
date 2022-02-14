@@ -14,8 +14,8 @@ module Rchess
 
     def move_to_sign(move)
       # TODO дописать нотации для хода (превращение пешки, взятие на проходе, шах, мат и пр.)
-      move_type = if move.has_attacked_figure? then TAKING else QUIET end
-      "#{move.figure.notation}#{move.position_from.notation}#{move_type}#{move.position_to.notation}"
+      move_type = move.has_attacked_figure? ? TAKING : QUIET
+      "#{move.figure.notation unless move.figure.is_a? Pawn}#{move.position_from.notation}#{move_type}#{move.position_to.notation}"
     end
   end
 end
