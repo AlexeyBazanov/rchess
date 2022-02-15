@@ -70,12 +70,12 @@ module Rchess
       figure.position = position
     end
 
-    def move_figure(position_from, position_to)
+    def move_figure(position_from, position_to, is_increases: true)
       cell_from = cell_by_position position_from
       return unless cell_from.has_figure?
 
       set_figure cell_from.figure, position_to
-      cell_from.figure.increase_moves
+      is_increases ? cell_from.figure.increase_moves : cell_from.figure.reduce_moves
       cell_from.clear_figure
       position_to
     end

@@ -31,9 +31,19 @@ puts party.current_notation
 party.do_move 'e2', 'e4'
 party.do_move 'd7', 'd5'
 party.do_move 'e4', 'd5'
-
 puts party.current_notation
-party.move_log.history.each { |move| puts move }
+party.undo_move
+party.undo_move
+party.do_move 'd7', 'd6'
+puts party.current_player_color
+puts party.current_notation
+
+# party.redo_move
+# party.redo_move
+# party.redo_move
+# puts party.current_notation
+# party.move_log.moves_history.each { |move| puts move }
+# party.move_log.taken_figures_history.each { |move| puts move }
 
 # puts party.current_notation
 

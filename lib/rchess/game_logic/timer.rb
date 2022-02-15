@@ -40,6 +40,10 @@ module Rchess
       @on_pause = false
     end
 
+    def stop
+      @timer_thread.exit
+    end
+
     def white_time_expired?
       white_time_passed > time_limit
     end

@@ -16,18 +16,15 @@ module Rchess
     end
 
     def stop
+      @timer.stop
     end
 
     def draw
+      stop
     end
 
     def surrender
-    end
-
-    def set_white_player(player)
-    end
-
-    def set_black_player(player)
+      stop
     end
 
     def current_notation
@@ -35,9 +32,11 @@ module Rchess
     end
 
     def moves_history
+      @move_log.moves_history
     end
 
-    def current_player
+    def current_player_color
+      @turn.color.name
     end
 
     def do_move(notation_from, notation_to)
@@ -61,15 +60,28 @@ module Rchess
       @move_log.add_move move_collection.find_move position_from, position_to
       @turn.next
       create_round
+      true
     end
 
     def undo_move
+      move = @move_log.prev_move
+      return false unless move
+
+      @field.move_figure move.position_to, move.position_from, is_increases: false
+      @field.set_figure move.attacked_figure, move.attacked_figure.position if move.has_attacked_figure?
+      @turn.prev
+      create_round
+      true
     end
 
-    def retry_move
-    end
+    def redo_move
+      move = @move_log.next_move
+      return false unless move
 
-    def go_to_move(move_number)
+      @field.move_figure move.position_from, move.position_to
+      @turn.next
+      create_round
+      true
     end
 
     private

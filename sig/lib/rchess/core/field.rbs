@@ -18,7 +18,7 @@ module Rchess
 
     def set_figure: (Figure figure, Position position) -> Position
 
-    def move_figure: (Position position_from, Position position_to) -> Position?
+    def move_figure: (Position position_from, Position position_to, is_increases: bool is_increases) -> Position?
 
     def remove_figure: (Position position) -> nil
 
