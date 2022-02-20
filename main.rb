@@ -1,42 +1,56 @@
-require "zeitwerk"
+# require "zeitwerk"
+require_relative 'lib/rchess'
+require 'ruby-prof'
+require 'benchmark'
 
-src_path = Dir.pwd + '/lib'
-loader = Zeitwerk::Loader.new
+# src_path = Dir.pwd + '/lib'
+# loader = Zeitwerk::Loader.new
+#
+# loader.push_dir src_path
+# loader.collapse("#{src_path}/rchess/core")
+# loader.collapse("#{src_path}/rchess/core/castling")
+# loader.collapse("#{src_path}/rchess/core/castling/patterns")
+# loader.collapse("#{src_path}/rchess/core/figures")
+# loader.collapse("#{src_path}/rchess/core/move")
+# loader.collapse("#{src_path}/rchess/core/notation")
+# loader.collapse("#{src_path}/rchess/factories")
+# loader.collapse("#{src_path}/rchess/factories/castling")
+# loader.collapse("#{src_path}/rchess/factories/field")
+# loader.collapse("#{src_path}/rchess/factories/figure")
+# loader.collapse("#{src_path}/rchess/factories/move_collection")
+# loader.collapse("#{src_path}/rchess/factories/party")
+# loader.collapse("#{src_path}/rchess/move_validators")
+# loader.collapse("#{src_path}/rchess/game_logic")
+#
+# loader.setup
 
-loader.push_dir src_path
-loader.collapse("#{src_path}/rchess/core")
-loader.collapse("#{src_path}/rchess/game_logic")
-loader.collapse("#{src_path}/rchess/core/castling")
-loader.collapse("#{src_path}/rchess/core/castling/patterns")
-loader.collapse("#{src_path}/rchess/core/figures")
-loader.collapse("#{src_path}/rchess/core/move")
-loader.collapse("#{src_path}/rchess/core/notation")
-loader.collapse("#{src_path}/rchess/factories")
-loader.collapse("#{src_path}/rchess/factories")
-loader.collapse("#{src_path}/rchess/factories/castling")
-loader.collapse("#{src_path}/rchess/factories/field")
-loader.collapse("#{src_path}/rchess/factories/figure")
-loader.collapse("#{src_path}/rchess/factories/move_collection")
-loader.collapse("#{src_path}/rchess/factories/party")
-loader.collapse("#{src_path}/rchess/move_validators")
+# include Rchess
 
-loader.setup
+# puts Rchess::Color::WHITE
 
-include Rchess
+Benchmark.bm do |x|
+  x.report { Rchess::Chess.start_new_party }
+end
 
-party_factory = FenPartyFactory.new
-party = party_factory.create FenNotation::START_ARRANGEMENT
-party.start
-puts party.current_notation
-party.do_move 'e2', 'e4'
-party.do_move 'd7', 'd5'
-party.do_move 'e4', 'd5'
-puts party.current_notation
-party.undo_move
-party.undo_move
-party.do_move 'd7', 'd6'
-puts party.current_player_color
-puts party.current_notation
+# result = RubyProf.profile do
+#   party_factory = Rchess::FenPartyFactory.new
+#   party_factory.create Rchess::FenNotation::START_ARRANGEMENT
+# end
+# #
+# printer = RubyProf::FlatPrinter.new(result)
+# printer.print(STDOUT)
+
+# party.start
+# puts party.current_notation
+# party.do_move 'e2', 'e4'
+# party.do_move 'd7', 'd5'
+# party.do_move 'e4', 'd5'
+# puts party.current_notation
+# party.undo_move
+# party.undo_move
+# party.do_move 'd7', 'd6'
+# puts party.current_player_color
+# puts party.current_notation
 
 # party.redo_move
 # party.redo_move

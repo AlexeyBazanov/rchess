@@ -35,8 +35,24 @@ module Rchess
       @move_log.moves_history
     end
 
+    def taken_figures_history
+      @move_log.white_taken_figures_history + @move_log.black_taken_figures_history
+    end
+
+    def white_taken_figures_history
+      @move_log.white_taken_figures_history
+    end
+
+    def black_taken_figures_history
+      @move_log.black_taken_figures_history
+    end
+
     def current_player_color
       @turn.color.name
+    end
+
+    def current_turn_number
+      @turn.number
     end
 
     def do_move(notation_from, notation_to)

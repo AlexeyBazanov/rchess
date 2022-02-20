@@ -38,11 +38,11 @@ module Rchess
     end
 
     def white_taken_figures_history
-      taken_figures ColorFactory.create_white
+      taken_figures_history ColorFactory.create_white
     end
 
     def black_taken_figures_history
-      taken_figures ColorFactory.create_black
+      taken_figures_history ColorFactory.create_black
     end
 
     def taken_figures_history(color=nil)

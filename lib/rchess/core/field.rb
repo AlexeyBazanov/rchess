@@ -26,7 +26,7 @@ module Rchess
       end
     end
 
-    def each_cell_right_top
+    def each_cell_left_top
       @cells.transpose.reverse.each do |row|
         row.each do |cell|
           yield cell

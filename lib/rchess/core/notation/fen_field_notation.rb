@@ -11,7 +11,7 @@ module Rchess
       empty_counter = 0
       row_counter = 0
 
-      field.each_cell_right_top do |cell|
+      field.each_cell_left_top do |cell|
         cell_sign = get_cell_sign cell
 
         if row_counter == 8
