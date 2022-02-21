@@ -15,7 +15,6 @@ module Rchess
       @score = 0
       @prev_moves = []
       @barrier_figures = []
-      # TODO вынести всю логику, связанную с отображением нотаций в отдельный модуль
     end
 
     def notation

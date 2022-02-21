@@ -1,7 +1,7 @@
 module Rchess
   class FenFieldNotation < AbstractNotation
     def initialize(field)
-      get_field_sign field
+      @sign = get_field_sign field
     end
 
     protected
@@ -38,7 +38,7 @@ module Rchess
         row_counter += 1
       end
 
-      @sign = sign
+      sign
     end
 
     def get_cell_sign(cell)
