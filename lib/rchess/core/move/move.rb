@@ -12,6 +12,7 @@ module Rchess
       @attacked_figure = attacked_figure
       @can_be_taking_on_pass = false
       @transform_possible = false
+      @transform_figure = nil
       @score = 0
       @prev_moves = []
       @barrier_figures = []
@@ -105,6 +106,24 @@ module Rchess
 
     def prohibit!(prohibition)
       @prohibition = prohibition
+    end
+
+    def do(field)
+      field.move_figure @position_from, @position_to
+    end
+
+    def undo(field)
+      field.move_figure @position_to, @position_from, is_increases: false
+      field.set_figure(@attacked_figure, @attacked_figure.position) if has_attacked_figure?
+      @transform_figure = nil if @transform_figure
+    end
+
+    def transform(field, transform_figure)
+      return false unless transform_possible?
+      return false unless @transform_figure.is_a? Figure
+      @transform_figure = transform_figure
+      field.set_figure @transform_figure, @position_to
+      true
     end
   end
 end

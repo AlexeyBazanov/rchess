@@ -18,5 +18,6 @@ loader.collapse("#{__dir__}/rchess/factories/figure")
 loader.collapse("#{__dir__}/rchess/factories/move_collection")
 loader.collapse("#{__dir__}/rchess/factories/party")
 loader.collapse("#{__dir__}/rchess/move_validators")
+loader.collapse("#{__dir__}/rchess/services")
 loader.collapse("#{__dir__}/rchess/game_logic")
 loader.setup

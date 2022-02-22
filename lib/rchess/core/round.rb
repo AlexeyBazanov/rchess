@@ -25,5 +25,23 @@ module Rchess
     def get_castlings(color)
       if color.white? then @white_castlings else @black_castlings end
     end
+
+    def get_castling(king, position_to)
+      castlings = get_castlings king.color
+      castlings.find { |castling| castling.possible? && castling.king_move_position.same?(position_to) }
+    end
+
+    def get_movable(figure, position_to)
+      if figure.is_a? King
+        castling = get_castling figure, position_to
+        return castling if castling
+      end
+
+      move_collection = get_move_collection figure
+
+      return unless move_collection
+
+      move_collection.find_move figure.position, position_to
+    end
   end
 end

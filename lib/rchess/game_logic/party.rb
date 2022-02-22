@@ -1,13 +1,15 @@
 module Rchess
   class Party
-    attr_reader :timer, :move_log
+    attr_reader :timer, :history
 
     def initialize(field, turn, round_factory)
       @field = field
       @turn = turn
       @round_factory = round_factory
       @timer = Timer.new @turn
-      @move_log = MoveLog.new
+      @history = History.new
+      @figure_factory = FenFigureFactory.new
+      @last_transform_move = nil
     end
 
     def start
@@ -32,19 +34,19 @@ module Rchess
     end
 
     def moves_history
-      @move_log.moves_history
+      @history.moves_history
     end
 
     def taken_figures_history
-      @move_log.white_taken_figures_history + @move_log.black_taken_figures_history
+      @history.white_taken_figures_history + @history.black_taken_figures_history
     end
 
     def white_taken_figures_history
-      @move_log.white_taken_figures_history
+      @history.white_taken_figures_history
     end
 
     def black_taken_figures_history
-      @move_log.black_taken_figures_history
+      @history.black_taken_figures_history
     end
 
     def current_player_color
@@ -56,54 +58,75 @@ module Rchess
     end
 
     def do_move(notation_from, notation_to)
-      return false if @round.nil?
+      return false if awaiting_transform?
 
       position_from = PositionFactory.create_by_notation notation_from
       position_to = PositionFactory.create_by_notation notation_to
+      movable = MoveService.do_move @field, @turn, @round, position_from, position_to
 
-      return false unless @field.figure_present? position_from
+      return false unless movable
 
-      figure = @field.figure_by_position position_from
+      if need_transform_for? movable
+        @last_transform_move = movable
+        return true
+      end
 
-      return false unless figure.color.same? @turn.color
-
-      move_collection = @round.get_move_collection figure
-
-      return false unless move_collection
-      return false unless move_collection.can_move_to? position_to
-
-      @field.move_figure position_from, position_to
-      @move_log.add_move move_collection.find_move position_from, position_to
+      @history.add_movable movable
       @turn.next
       create_round
       true
     end
 
     def undo_move
-      move = @move_log.prev_move
-      return false unless move
+      return false if awaiting_transform?
 
-      @field.move_figure move.position_to, move.position_from, is_increases: false
-      @field.set_figure move.attacked_figure, move.attacked_figure.position if move.has_attacked_figure?
+      movable = @history.prev
+      return false unless movable
+
+      MoveService.undo_move @field, movable
       @turn.prev
       create_round
       true
     end
 
     def redo_move
-      move = @move_log.next_move
-      return false unless move
+      return false if awaiting_transform?
 
-      @field.move_figure move.position_from, move.position_to
+      movable = @history.next
+      return false unless movable
+
+      MoveService.redo_move @field, movable
       @turn.next
       create_round
       true
+    end
+
+    def transform(figure_notation)
+      return false unless awaiting_transform?
+
+      figure = @figure_factory.create_figure figure_notation
+      transform = MoveService.do_transform @field, @last_transform_move, figure
+      return false unless transform
+
+      @history.add_movable @last_transform_move
+      @turn.next
+      create_round
+      @last_transform_move = nil
+      true
+    end
+
+    def awaiting_transform?
+      @last_transform_move.is_a?(Move)
     end
 
     private
 
     def create_round
       @round = @round_factory.create_round @turn
+    end
+
+    def need_transform_for?(movable)
+      movable.is_a?(Move) && movable.transform_possible?
     end
   end
 end

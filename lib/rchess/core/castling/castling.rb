@@ -35,6 +35,18 @@ module Rchess
       @rook_move.position_to
     end
 
+    def get_moves
+      [@king_move, @rook_move]
+    end
+
+    def do(field)
+      get_moves.each { |move| move.do(field) }
+    end
+
+    def undo(field)
+      get_moves.each { |move| move.undo(field) }
+    end
+
     private
 
     def initialize_required_positions
