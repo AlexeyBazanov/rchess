@@ -11,8 +11,7 @@ module Rchess
 
     def add_movable(movable)
       if @tail < @movables.length - 1
-        movables = has_movables? ? @movables[0..@tail] : []
-        @movables = movables
+        @movables = get_current_movables
       end
       @movables.append movable
       @tail += 1
@@ -32,7 +31,7 @@ module Rchess
     end
 
     def movables
-      @movables.map.with_index { |movable, index| "#{index+1}. #{movable.notation}" }
+      get_current_movables.map.with_index { |movable, index| "#{index+1}. #{movable.notation}" }
     end
 
     def white_taken_figures
@@ -48,6 +47,10 @@ module Rchess
     end
 
     protected
+
+    def get_current_movables
+      has_movables? ? @movables[0..@tail] : []
+    end
 
     def taken_figures_list(color=nil)
       taken_figures = []

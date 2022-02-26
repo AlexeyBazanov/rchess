@@ -30,11 +30,11 @@ module Rchess
     end
 
     def current_notation
-      @field.notation
+      @field.notation.to_s
     end
 
     def moves_history
-      @history.moves_history
+      @history.movables
     end
 
     def taken_figures_history

@@ -12,4 +12,5 @@ group :development do
   gem 'rubocop'
   gem 'ruby-prof'
   gem 'benchmark'
+  gem 'byebug'
 end
