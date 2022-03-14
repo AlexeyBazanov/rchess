@@ -1,5 +1,4 @@
 module Rchess
-  # TODO rnb1kbnr/ppp2ppp/3q4/1B1pp3/4P3/5N2/PPPP1PPP/RNBQ1RK
   class FenFieldNotation < AbstractNotation
     COLS_IN_ROW = 8
 

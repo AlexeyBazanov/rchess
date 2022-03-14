@@ -26,6 +26,10 @@ module Rchess
     BLACK_ROOK = 'r'
     WHITE_PAWN = 'P'
     BLACK_PAWN = 'p'
+    KING_CASTLING = '0—0'
+    QUEEN_CASTLING = '0—0—0'
+    WHITE_MOVE = 'w'
+    BLACK_MOVE= 'b'
 
     class << self
       def figure?(notation)

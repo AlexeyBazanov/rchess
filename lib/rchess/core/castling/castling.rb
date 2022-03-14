@@ -1,6 +1,6 @@
 module Rchess
   class Castling
-    attr_reader :king_move, :rook_move, :side, :through_position, :required_positions
+    attr_reader :king_move, :rook_move, :side, :through_position, :required_positions, :notation
     attr_accessor :prohibition
 
     def initialize(king_move, rook_move, side, through_position)
@@ -8,6 +8,7 @@ module Rchess
       @rook_move = rook_move
       @side = side
       @through_position = through_position
+      @notation = CastlingNotation.new self
       initialize_required_positions
     end
 

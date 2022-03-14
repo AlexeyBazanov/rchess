@@ -57,6 +57,14 @@ module Rchess
       @turn.number
     end
 
+    def white_move?
+      @turn.color.white?
+    end
+
+    def awaiting_transform?
+      @last_transform_move.is_a?(Move)
+    end
+
     def do_move(notation_from, notation_to)
       return false if awaiting_transform?
 
@@ -113,10 +121,6 @@ module Rchess
       create_round
       @last_transform_move = nil
       true
-    end
-
-    def awaiting_transform?
-      @last_transform_move.is_a?(Move)
     end
 
     private
